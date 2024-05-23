@@ -4,10 +4,6 @@ These exercises are back inside the exercises folder.
 
 ## Exercise 1: Async and Await
 
-Lots of functions are asynchronous. They don't return a value immediately, but
-instead return a promise that will resolve to a value at some point in the
-future - once they're done with what they're doing.
-
 Have a look at the
 [Async and Await](https://tech-docs.corndel.com/js/async-await.html)
 documentation for this exercise.
@@ -41,8 +37,9 @@ Again, all that's missing are some `async` and `await` keywords.
 Finally, you'll find a function `makeBreakfast()` inside
 `exercises/breakfast.js`.
 
-This function should return the toast and coffee that you made from the previous
-functions.
+This function should return the `toast` and `coffee` that you made from the
+previous functions. Make sure you `await` them, and pass them any arguments they
+need.
 
 ## Exercise 2: Error Handling
 
@@ -60,8 +57,8 @@ To run the tests for this exercise, use `npm run test:d2e2`.
 
 ### Throwing Errors
 
-We'll be making a function that checks an id for validity. If the id is valid,
-we'll return it. If it's not, for whatever reason, we'll throw an error.
+We'll be making a function that checks an `id` for validity. If the `id` is
+valid, we'll return it. If it's not, for whatever reason, we'll throw an error.
 
 We'll be implementing the `validateId` function inside
 `exercises/validateId.js`.
@@ -71,17 +68,21 @@ We'll be implementing the `validateId` function inside
 Now that we've written a function that throws a bunch of errors, we'll write a
 function that catches them.
 
-It turns out that it's bad security practice to just throw errors willy nilly,
-and for them to be potentially displayed to the user. We should catch them and
-handle them gracefully.
-
 Therefore, we'll be implementing a function `isIdValid()` inside
-`exercises/validateId.js`. It should call `validateId` and catch any errors that
-it throws, and return true or false depending on whether the id is valid.
+`exercises/validateId.js`. It should:
 
-There'll also be a `logger` object that gets passed in to `isIdValid()`. You
-should call `logger.error(message)` to log if you encounter any errors from
-`validateId`.
+- call `validateId` on the `id`
+- if `id` is valid (i.e. no error is thrown by `validateId`), it should return
+  `true`.
+- if `id` is not valid (i.e. an error is thrown by `validateId`), it should:
+  - catch the error,
+  - call `logger.error(message)` with a useful message.
+  - return `false`.
+
+> [!INFO]
+>
+> `logger` is an object which is passed in to `validateId` - it is a custom
+> logger, so use `logger.error` instead of `console.log`.
 
 ## Exercise 3: File I/O
 
