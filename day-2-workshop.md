@@ -1,67 +1,59 @@
-# Day 2 Exercises
+# Day 2 Workshop
 
-## Exercise 1: Async and Await
+## Reading Transactions
 
-In this exercise, you'll be working with a set of functions that simulate making
-breakfast. It's a bit of a contrived example, but it's a good way to illustrate
-the concept.
+The support team keep their records in CSV format. Their records for 2014 are
+stored in `data/Transactions2014.csv`
 
-To run the tests for this exercise, use `npm run test:d2e1`.
+Note that there’s a header row, telling you what each column means. Every record
+has a date and represents a payment from one person to another person. There’s
+also a narrative field which describes what the payment was for.
 
-1. Have a look at the
-   [Async and Await](https://tech-docs.corndel.com/js/async-await.html)
-   documentation for this exercise.
+The person in the ‘From’ column is paying money, so the amount needs to be
+deducted from their account. The person in the ‘To’ column is being paid, so the
+amount needs to be added to their account.
 
-2. Inside [exercises/breakfast.js](/exercises/breakfast.js), you'll find a
-   function `makeToast()`. All that's missing are some `async` and `await`
-   keywords. You'll need to use `await` to wait for the `toaster.toast()`
-   function to finish.
+Use a class for each type of object you want to create.
 
-3. Similar to the first part, you'll find a function `makeCoffee()` inside
-   [exercises/breakfast.js](/exercises/breakfast.js). Again, all that's missing
-   are some `async` and `await` keywords.
+You should add two commands:
 
-4. Finally, you'll find a function `makeBreakfast()` inside
-   [exercises/breakfast.js](/exercises/breakfast.js). This function should
-   create a `toast` and `coffee` and return them. Make sure you `await` them,
-   and pass them any arguments they need.
+- `node cli list all` – should output the names of each person, and the total
+  amount of money they should receive from the bank. (It could be a negative
+  number, if they owe the bank money!)
 
-## Exercise 2: Error Handling
+- `node cli list <account name>` – should print a list of every transaction,
+  with the date and narrative, for that person’s account. For example,
+  `node cli list "jon a"` would list all of Jon A’s transactions.
 
-To run the tests for this exercise, use `npm run test:d2e2`.
+## Moving on
 
-1. Have a look at the
-   [Error Handling](https://tech-docs.corndel.com/js/handling-errors.html)
-   documentation for this exercise.
+Once you have dealt with `data/Transactions2014.csv`, there are some other files
+in the `data` folder - see if you can make the application work with those, too.
+You might need to do some research online to see how to deal with issues that
+may crop up.
 
-2. Implement the `validateId` function inside
-   [exercises/validateId.js](/exercises/validateId.js).
+## Hints
 
-Now that we've written a function that throws a bunch of errors, we'll write a
-function that catches them.
+### Working with csv
 
-3. Implement the function `isIdValid()` inside
-   [exercises/validateId.js](/exercises/validateId.js). It should:
-   - call `validateId` on the `id`
-   - if `id` is valid (i.e. no error is thrown by `validateId`), it should
-     return `true`.
-   - if `id` is not valid (i.e. an error is thrown by `validateId`), it should:
-     - catch the error,
-     - call `logger.error(message)` with a useful message.
-     - return `false`.
+You can use `string.split` to split several lines of text into an array.
 
-> [!IMPORTANT]
->
-> `logger` is an object which is passed in to `validateId` - it is a custom
-> logger, so use `logger.error` instead of `console.log`.
+For example
 
-## Exercise 3: File I/O
+```txt
+a,b,c
+d,e,f
+g,h,i
+```
 
-Finally, we'll be looking at persisting data by reading and writing files.
+```js
+txt.split('\n') // => ['a,b,c', 'd,e,f', 'g,h,i']
+```
 
-To run the tests for them, use `npm run test:d2e3`.
+You can then use `.split(',')` on each item in the array to separate out the
+values.
 
-1. Have a look at
-   [Reading and Writing Files](https://tech-docs.corndel.com/js/reading-and-writing-files.html).
+### Removing the header
 
-2. Complete the functions in [exercises/fileIO.js](/exercises/fileIO.js).
+Remember [slice](https://tech-docs.corndel.com/js/array-slice.html)? You can use
+`.slice(1)` to keep only the data rows and get rid of the header.
