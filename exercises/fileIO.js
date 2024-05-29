@@ -5,15 +5,12 @@ export async function readHelloWorld() {
   // The path is provided for you:
   const path = new URL('./resources/1-hello-world.txt', import.meta.url)
 
-  // TODO: Read the contents of the file as a utf-8 string
-  // TODO: Return the contents
+  // TODO: Return the contents of the file as a utf-8 string
 }
 
 // Part 2: Return the contents of ./resources/2-diary-entry.txt
 export async function readDiaryEntry() {
-  // TODO: Create the path
-  // TODO: Read the contents of the file as a utf-8 string
-  // TODO: Return the contents
+  // TODO: Return the contents of the file as a utf-8 string
 }
 
 // Part 3: Overwrite ./resources/3-save-data.txt with saveDataString
@@ -31,6 +28,6 @@ export async function writeSaveData(saveData) {
 export async function appendLogEntry(logEntry) {
   // The text to append is given:
   const textToAppend = logEntry + '\n'
-  // TODO: Create the path
+
   // TODO: Append the text to the file
 }
