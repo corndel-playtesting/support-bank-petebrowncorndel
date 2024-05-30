@@ -1,11 +1,11 @@
 import fs from 'fs/promises'
 
-export function readJSONTransactions() {
+export async function readJSONTransactions() {
     // Read the Transactions2013.json file
-    const transactionsData = ''
+    const transactionsData = await fs.readFile('./data/Transactions2013.json')
 
     // Use JSON.parse to convert the string into an array of objects
-    const transactions = null
+    const transactions = JSON.parse(transactionsData)
 
     return transactions
 }
