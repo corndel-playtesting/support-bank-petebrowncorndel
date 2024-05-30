@@ -12,8 +12,8 @@ export class Transaction {
   async parseCSV() {
     const path = './data/Transactions2014.csv'
     const txt = await fs.readFile(path, 'utf-8')
-    const transactionObjects = txt.split('\n')
-    const transactionArray = transactionObjects.map((transaction) =>
+    const transactionRows = txt.split('\n')
+    const transactionArray = transactionRows.map((transaction) =>
       transaction.split(',')
     )
     const transactionArrayWithoutHeader = transactionArray.slice(1)
@@ -41,7 +41,7 @@ export class Transaction {
     return transactions
       .filter((transaction) => {
         const [date, from, to, narrative, amount] = transaction
-        return from === accountName || to === accountName
+        return from.toLowerCase() === accountName.toLowerCase() || to.toLowerCase() === accountName.toLowerCase()
       })
       .map((transaction) => {
         const [date, from, to, narrative, amount] = transaction
