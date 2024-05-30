@@ -64,7 +64,7 @@ Note that the data from the API is of the form
 
 so you will need to extract just a list of Pokémon names from the data.
 
-> [!HINT]
+> [!TIP]
 >
 > You could use [.map()](https://tech-docs.corndel.com/js/array-map.html) to
 > extract the names from the results array.
