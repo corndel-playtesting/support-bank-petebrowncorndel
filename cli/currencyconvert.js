@@ -1,13 +1,19 @@
-import { Command } from 'commander'
+import { Command } from 'commander';
+import 'dotenv/config';
+import currencyConverter from '../models/currencyConverter.js';
 
-const currencyConvert = new Command('convert')
+const convertController = new Command('currency');
 
-currencyConvert
-  .command('log <amount> <from> <to>')
-  .description('Log ammount of converted currency')
-  .action((amount, from, to) => {
-    const converted = amount * from * to
-    console.log(`£${converted} should be paid each.`)
-  })
+convertController
+  .command('convert <amount> <from> <to>')
+  .description('Convert currency')
+  .action(async (amount, from, to) => {
+    try {
+      const convertedAmount = await currencyConverter.convert(amount, from, to);
+      console.log(`${amount} ${from} is equal to ${convertedAmount} ${to}`);
+    } catch (error) {
+      console.error('Error converting currency:', error.message);
+    }
+  });
 
-export default currencyConvert
+export default convertController;
